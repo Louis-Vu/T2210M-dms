@@ -92,3 +92,15 @@ values('DK001','NCC001','DV01','Hiace','MP01','2015/11/20','2016/11/20',4),
 ('DK025','NCC003','DV03','Hiace','MP02','2016/08/24','2017/10/25',1);
 
 select * from subs
+
+select * from vehicles where number_of_seats > 5
+
+select * from pro where id in 
+	(select pro_id from subs where vehicles in
+		(select vehicles from vehicles where car_company = 'Toyota')
+		and charges_id in
+		(select id from charges where unit_price = 15000) ) or id in
+			(select pro_id from subs where vehicles in
+				(select vehicles from vehicles where car_company = 'KIA')
+				and charges_id in
+					(select id from charges where unit_price = 20000) )
